@@ -1,10 +1,10 @@
-function longestPalindrome2(s: string): string {
-    const table: boolean[][] = Array.from({ length: s.length }, (_, i) =>
-        Array.from({ length: s.length }, (_, j) => (i == j ? true : false)),
-    );
-    const longestPalIndex: [number, number] = [s.length - 1, s.length - 1];
+"use strict";
+function longestPalindrome2(s) {
+    const table = Array.from({ length: s.length }, (_, i) => Array.from({ length: s.length }, (_, j) => (i == j ? true : false)));
+    const longestPalIndex = [s.length - 1, s.length - 1];
     for (let i = 0; i < s.length - 1; i++) {
-        if (s[i] != s[i + 1]) continue;
+        if (s[i] != s[i + 1])
+            continue;
         table[i][i + 1] = true;
         longestPalIndex[0] = i;
         longestPalIndex[1] = i + 1;
@@ -12,10 +12,8 @@ function longestPalindrome2(s: string): string {
     for (let i = s.length - 2; i >= 0; i--) {
         for (let j = i + 1; j < s.length; j++) {
             table[i][j] = table[i][j] || (table[i + 1][j - 1] && s[i] === s[j]);
-            if (
-                table[i][j] &&
-                j - i > longestPalIndex[1] - longestPalIndex[0]
-            ) {
+            if (table[i][j] &&
+                j - i > longestPalIndex[1] - longestPalIndex[0]) {
                 longestPalIndex[0] = i;
                 longestPalIndex[1] = j;
             }
@@ -23,5 +21,4 @@ function longestPalindrome2(s: string): string {
     }
     return s.slice(longestPalIndex[0], longestPalIndex[1] + 1);
 }
-
 console.log(longestPalindrome2('babad'));
