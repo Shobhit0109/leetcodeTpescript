@@ -1,0 +1,3 @@
+[submodule "leetcode-typescript"]
+	path = leetcode-typescript
+	url = https://github.com/sergeyleschev/leetcode-typescript
