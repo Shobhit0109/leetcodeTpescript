@@ -1,3 +1,0 @@
-[submodule "leetcode-typescript"]
-	path = extra/leetcode-typescript
-	url = https://github.com/sergeyleschev/leetcode-typescript
