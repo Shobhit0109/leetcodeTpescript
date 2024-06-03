@@ -1,5 +1,7 @@
 'use strict';
 
+import { log } from "console";
+
 const fs = require('fs');
 
 process.stdin.resume();
@@ -25,6 +27,7 @@ function readLine(): string {
 
 function simpleArraySum(ar: number[]): number {
     // Write your code here
+    console.log(ar);
     return 0;
 }
 

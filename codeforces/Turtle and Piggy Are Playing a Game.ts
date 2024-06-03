@@ -23,11 +23,6 @@ function readLine(): string {
     return input[currentLine++];
 }
 
-function simpleArraySum(ar) {
-    // Write your code here
-    return;
-}
-
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
@@ -38,7 +33,7 @@ function main() {
         .split(' ')
         .map((arTemp) => parseInt(arTemp, 10));
 
-    const result = simpleArraySum(ar);
+    const result = (ar).join('');
 
     ws.write(result + '\n');
 
