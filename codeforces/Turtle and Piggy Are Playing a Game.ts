@@ -5,22 +5,28 @@ const fs = require('fs');
 process.stdin.resume();
 process.stdin.setEncoding('utf-8');
 
-let inputString: string[] | string = '';
-let currentLine = 0;
+let inputString: string = '';
+let currentLine: number = 0;
+let input: string[] = [];
 
-process.stdin.on('data', function (inputStdin) {
-    (inputString as string) += inputStdin;
+process.stdin.on('data', function (inputStdin: Buffer): void {
+    inputString += inputStdin;
 });
 
-process.stdin.on('end', function () {
-    inputString = (inputString as string).split('\n');
+process.stdin.on('end', function (): void {
+    input = inputString.split('\n');
+
     main();
 });
 
-function readLine() {
-    return inputString[currentLine++];
+function readLine(): string {
+    return input[currentLine++];
 }
 
+function simpleArraySum(ar) {
+    // Write your code here
+    return;
+}
 
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
@@ -32,10 +38,9 @@ function main() {
         .split(' ')
         .map((arTemp) => parseInt(arTemp, 10));
 
-    console.log(ar);
-    // const result = simpleArraySum(ar);
+    const result = simpleArraySum(ar);
 
-    // ws.write(result + '\n');
+    ws.write(result + '\n');
 
     ws.end();
 }

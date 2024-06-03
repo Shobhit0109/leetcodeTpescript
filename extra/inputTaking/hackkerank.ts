@@ -5,33 +5,27 @@ const fs = require('fs');
 process.stdin.resume();
 process.stdin.setEncoding('utf-8');
 
-let inputString = '';
-let currentLine = 0;
+let inputString: string = '';
+let currentLine: number = 0;
+let input: string[] = [];
 
-process.stdin.on('data', function(inputStdin) {
+process.stdin.on('data', function (inputStdin: Buffer): void {
     inputString += inputStdin;
 });
 
-process.stdin.on('end', function() {
-    inputString = inputString.split('\n');
+process.stdin.on('end', function (): void {
+    input = inputString.split('\n');
 
     main();
 });
 
-function readLine() {
-    return inputString[currentLine++];
+function readLine(): string {
+    return input[currentLine++];
 }
-
-/*
- * Complete the 'simpleArraySum' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY ar as parameter.
- */
 
 function simpleArraySum(ar) {
     // Write your code here
-
+    return;
 }
 
 function main() {
@@ -39,7 +33,10 @@ function main() {
 
     const arCount = parseInt(readLine().trim(), 10);
 
-    const ar = readLine().replace(/\s+$/g, '').split(' ').map(arTemp => parseInt(arTemp, 10));
+    const ar = readLine()
+        .replace(/\s+$/g, '')
+        .split(' ')
+        .map((arTemp) => parseInt(arTemp, 10));
 
     const result = simpleArraySum(ar);
 
