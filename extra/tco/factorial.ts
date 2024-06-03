@@ -1,23 +1,47 @@
-const trampoline = (fn) => {
-  while (typeof fn === 'function') {
-    fn = fn()
+const trampoline = (fn: trampolineArg): trampolineArg => {
+    while (typeof fn === 'function') {
+        fn = fn();
+    }
+    return fn;
+};
+
+const factorialHelper = (x: bigint, accumulator: bigint) => {
+  if (x === 1n || x === 0n) {
+    return accumulator;
   }
+  return () => factorialHelper(x - 1n, x * accumulator);
+};
+type trampolineArg = ReturnType<typeof factorialHelper>;
 
-  return fn
+const factorial = (n: bigint) => trampoline(factorialHelper(n, 1n));
+
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString: string = '';
+let currentLine: number = 0;
+let input: string[] = [];
+
+process.stdin.on('data', function (inputStdin: Buffer): void {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function (): void {
+    input = inputString.split('\n');
+
+    main();
+});
+
+function readLine(): string {
+    return input[currentLine++];
 }
 
-const factorialHelper = (x, accumulator) => {
-  if (x <= 1) {
-    return accumulator
-  }
+function main() {
 
-  return () => factorialHelper(x - BigInt(1), x * accumulator)
+    const num = parseInt(readLine().trim(), 10);
+
+    const result = factorial(BigInt(num));
+
+    console.log(result.toString());
 }
-
-const factorial = (n) => {
-  // Converting values to BigInt
-  //-------------------------------\/----------\/
-  return trampoline(factorialHelper(BigInt(n), BigInt(1)));
-}
-
-console.log(factorial(BigInt(400)))

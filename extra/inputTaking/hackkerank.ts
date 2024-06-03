@@ -23,9 +23,9 @@ function readLine(): string {
     return input[currentLine++];
 }
 
-function simpleArraySum(ar) {
+function simpleArraySum(ar: number[]): number {
     // Write your code here
-    return;
+    return 0;
 }
 
 function main() {

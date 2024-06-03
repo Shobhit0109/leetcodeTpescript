@@ -1,58 +1,66 @@
-const benchmarkMap = size => {
+const benchmarkMap = (size: number) => {
     console.time('benchmarkMap');
-    var map = new Map();
-    for (var i = 0; i < size; i++) map.set(i, i);
-    for (var i = 0; i < size; i++) var x = map.get(i);
+    let map = new Map();
+    for (let i = 0; i < size; i++) map.set(i, i);
+    for (let i = 0; i < size; i++) {
+        let x = map.get(i);
+    }
     console.timeEnd('benchmarkMap');
-}
+};
 
-const benchmarkObj = size => {
+const benchmarkObj = (size: number) => {
     console.time('benchmarkObj');
-    var obj = {};
-    for (var i = 0; i < size; i++) obj[i] = i;
-    for (var i = 0; i < size; i++) var x = obj[i];
+    let obj: Record<number, number> = {};
+    for (let i = 0; i < size; i++) obj[i] = i;
+    for (let i = 0; i < size; i++) {
+        let x = obj[i];
+    }
     console.timeEnd('benchmarkObj');
-}
+};
 
-const benchmarkMapStr = size => {
+const benchmarkMapStr = (size: number) => {
     console.time('benchmarkMapStr');
-    var map = new Map();
-    for (var i = 0; i < size; i++) map.set(i.toString(), i);
-    for (var i = 0; i < size; i++) var x = map.get(i.toString());
+    let map = new Map();
+    for (let i = 0; i < size; i++) map.set(i.toString(), i);
+    for (let i = 0; i < size; i++) {
+        let x = map.get(i.toString());
+    }
     console.timeEnd('benchmarkMapStr');
-}
+};
 
-const benchmarkObjStr = size => {
+const benchmarkObjStr = (size: number) => {
     console.time('benchmarkObjStr');
-    var obj = {};
-    for (var i = 0; i < size; i++) obj[i.toString()] = i;
-    for (var i = 0; i < size; i++) var x = obj[i.toString()];
+    let obj: Record<string, number> = {};
+    for (let i = 0; i < size; i++) obj[i.toString()] = i;
+    for (let i = 0; i < size; i++) {
+        let x = obj[i.toString()];
+    }
     console.timeEnd('benchmarkObjStr');
-}
+};
 
-const benchmarkMapDel = size => {
+const benchmarkMapDel = (size: number) => {
     console.time('benchmarkMapDel');
-    var map = new Map();
-    for (var i = 0; i < size; i++) map.set(i, i);
-    for (var i = 0; i < size; i++) {
-        var x = map.get(i);
+    let map = new Map();
+    for (let i = 0; i < size; i++) map.set(i, i);
+    for (let i = 0; i < size; i++) {
+        let x = map.get(i);
         map.delete(i);
     }
     console.timeEnd('benchmarkMapDel');
-}
+};
 
-const benchmarkObjDel = size => {
+const benchmarkObjDel = (size: number) => {
     console.time('benchmarkObjDel');
-    var obj = {};
-    for (var i = 0; i < size; i++) obj[i] = i;
-    for (var i = 0; i < size; i++) {
-        var x = obj[i];
+    let obj: Record<number, number> = {};
+    for (let i = 0; i < size; i++) obj[i] = i;
+    for (let i = 0; i < size; i++) {
+        let x = obj[i];
         delete obj[i];
     }
     console.timeEnd('benchmarkObjDel');
-}
+};
 
-var size = 1000000;
+const size = 1000000;
 
 benchmarkMap(size);
 benchmarkObj(size);
