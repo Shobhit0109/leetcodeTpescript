@@ -1,19 +1,13 @@
-/**
- * Calculates the nth Fibonacci number using recursion with async/await.
- *
- * @param {number} n - The index of the Fibonacci number to calculate.
- * @return {Promise<number>} A promise that resolves to the nth Fibonacci number.
- */
+function fiboNormal(n: number): number {
+  if (n === 0 || n === 1) return n;
+  return fiboNormal(n - 1) + fiboNormal(n - 2);
+}
+
 async function fibo1(n: number): Promise<number> {
   if (n === 0 || n === 1) return n;
   const f1 = await fibo1(n - 1);
   const f2 = await fibo1(n - 2);
   return f1 + f2;
-}
-// write normal fibonaci function
-function fibo(n: number): number {
-  if (n === 0 || n === 1) return n;
-  return fibo(n - 1) + fibo(n - 2);
 }
 
 async function fibo2(n: number): Promise<number> {
@@ -22,9 +16,7 @@ async function fibo2(n: number): Promise<number> {
   return f1 + f2;
 }
 
-async function go() {
-  const n = 30;
-
+async function go(n: number = 20) {
   console.time("fibo1");
   await fibo1(n);
   console.timeEnd("fibo1");
@@ -32,12 +24,46 @@ async function go() {
   console.time("fibo2");
   await fibo2(n);
   console.timeEnd("fibo2");
+
+  console.time("fiboNormal");
+  fiboNormal(n);
+  console.timeEnd("fiboNormal");
+
+  const fibo = (n: number): number => +(n < 2 || fibo(n - 1) + fibo(n - 2));
+
+  console.time("fibo");
+  fibo(n);
+  console.timeEnd("fibo");
+
+  // iteration
+  const fiboIter = (n: number): number => {
+    let a = 0;
+    let b = 1;
+    for (let i = 0; i < n; i++) {
+      [a, b] = [b, a + b];
+    }
+    return a;
+  };
+
+  console.time("fiboIter");
+  fiboIter(n);
+  console.timeEnd("fiboIter");
+
+  process.exit();
 }
 
 console.clear();
-go();
 
-// try to compare the time between normal and async fibonacci
-console.time("fibo");
-fibo(30);
-console.timeEnd("fibo");
+//  take input from user in node
+const input = process.stdin;
+input.setEncoding("utf-8");
+
+console.log("Enter number to calculate fibonacci: ");
+input.on("data", (data) => {
+  const n = parseInt(data + "");
+  if (isNaN(n)) {
+    console.log("Please enter a valid number");
+    return;
+  }
+  go(n).then(() => console.log("done"));
+});
