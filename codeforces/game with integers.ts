@@ -22,12 +22,13 @@ function readLine(): string {
 }
 
 function main() {
+    let testcases = parseInt(readLine().trim(), 10);
 
-    const _arCount = parseInt(readLine().trim(), 10);
-
-    const _ar = readLine()
-        .replace(/\s+$/g, '')
-        .split(' ')
-        .map((arTemp) => parseInt(arTemp, 10));
-
+    while (testcases--) {
+        const n = parseInt(readLine().trim(), 10);
+        console.log(solve(n) ? 'First' : 'Second');
+    }
+}
+function solve(n: number): boolean {
+    return (n - 1) % 3 === 0 || (n + 1) % 3 === 0;
 }
